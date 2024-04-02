@@ -17,6 +17,7 @@ class PostCubit extends Cubit<PostState> {
       final response = await _dio.get(
           'https://jsonplaceholder.typicode.com/posts');
       if (response.statusCode == 200) {
+        posts = response.data;
         emit(PostSuccess());
       } else {
         emit(PostError());

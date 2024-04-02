@@ -39,14 +39,15 @@ class _PostScreenState extends State<PostScreen>{
             if (posts.isEmpty) {
               return Center(child: Text('No hay películas para mostrar'));
             }
+            
             return ListView.builder(
+              padding: const EdgeInsets.all(8),
               itemCount: posts.length,
               itemBuilder: (context, index) {
-                final post = posts[index];
-                print(post);
-                return ListTile(
-                  title: Text(post),
-                );
+                return Container(
+                height: 50,
+                child: Center(child: Text('Entry ${posts[index]}')),
+              );
               },
             );
 }
