@@ -23,16 +23,34 @@ class _PostScreenState extends State<PostScreen>{
               if(state is PostLoading){
                 return Center(child: CircularProgressIndicator());
               }else if(state is PostSuccess){
-                return Text("Se obtuvo las pelis");
+                return buildPostList(context);
               }else if (state is PostError){
                 return Text("Error");
               }
-              return Text('Bienvenido');
+              return Container();
               }),
-          
+        
         ],
       ),
     );
   }
+  Widget buildPostList(BuildContext context) {
+            final posts = context.select((PostCubit cubit) => cubit.posts);
+            if (posts.isEmpty) {
+              return Center(child: Text('No hay películas para mostrar'));
+            }
+            return ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                final post = posts[index];
+                print(post);
+                return ListTile(
+                  title: Text(post),
+                );
+              },
+            );
 }
+}
+
+
 
